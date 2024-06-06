@@ -1,9 +1,10 @@
 from aiogram import Bot
+from aiogram.client.default import DefaultBotProperties
 from pydantic_settings import BaseSettings
 from redis import Redis
 
 
-class Secrets (BaseSettings):
+class Secrets(BaseSettings):
     token: str
     admin_id: int
     openai_key: str
@@ -18,4 +19,5 @@ class Secrets (BaseSettings):
 
 secrets = Secrets()
 redis_conn = Redis(host=secrets.redis_host)
-bot = Bot(token=secrets.token, parse_mode="Markdown")
+bot = Bot(token=secrets.token,
+          default=DefaultBotProperties(parse_mode="Markdown"))
