@@ -1,0 +1,14 @@
+services:
+  bot:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - .:/code
+
+  redis:
+    image: redis
+    restart: always
+    volumes:
+      - ./redis_data:/data
